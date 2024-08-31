@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register and Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input { padding: 8px; width: 100%; box-sizing: border-box; }
+        .btn { padding: 10px 20px; border: none; color: white; background-color: #007BFF; cursor: pointer; }
+        .btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <!-- Registration Form -->
+    <h1>Register</h1>
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="regEmail">Email:</label>
+            <input type="email" id="regEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" required>
+        </div>
+        <button type="button" class="btn" onclick="register()">Register</button>
+    </form>
+
+    <!-- Login Form -->
+    <h1>Login</h1>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" required>
+        </div>
+        <button type="button" class="btn" onclick="login()">Login</button>
+    </form>
+
+    <script>
+        // Function to handle registration
+        function register() {
+            const username = document.getElementById('username').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            if (username && phone && email && password) {
+                // Store user data in local storage
+                localStorage.setItem('username', username);
+                localStorage.setItem('phone', phone);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userPassword', password);
+                alert('Registration successful!');
+                document.getElementById('registerForm').reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Function to handle login
+        function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const storedEmail = localStorage.getItem('userEmail');
+            const storedPassword = localStorage.getItem('userPassword');
+
+            if (email === storedEmail && password === storedPassword) {
+                alert('Login successful!');
+                // Optionally, redirect to another page
+                // window.location.href = '/dashboard';
+            } else {
+                alert('Invalid email or password.');
+            }
+        }
+    </script>
+
+</body>
+</html>
